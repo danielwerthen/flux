@@ -10,9 +10,18 @@ chai.use(cap);
 
 describe('Flux', function () {
 	it('should connect properly', function (done) {
-		flux.start({ port: 3000 }, function (err) {
+		flux.node.start({ port: 3000, nodes: [ { name: 'NodeB', port: 3001, host: 'localhost' } ] }, function (err, flux) {
+			if (err) {
+				console.dir(err);
+				return;
+			}
 		});
-		flux.start({ port: 3001, nodes: [ { port: 3000, host: 'localhost' } ] }, function (err) {
+		flux.node.start({ port: 3001, nodes: [ { name: 'NodeA', port: 3000, host: 'localhost' } ] }, function (err, flux) {
+			if (err) {
+				console.dir(err);
+				return;
+			}
+			done();
 		});
 	});
 	it('should hash properly', function () {
