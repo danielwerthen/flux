@@ -1,4 +1,4 @@
-Signal({ timeout: 100 })
+Signal({ timeout   : 100, "lazy": { deniro: 5, huru: 24 }})
 	.Knx.receive
 		(add, mess) => NodeB.print(mess)
 
@@ -6,10 +6,10 @@ Signal({ timeout: 500 })
 	NodeA.func1({ a: 5 }, 15)
 		(err, res) => NodeB.print(res)
 			(ok) => NodeB.print(err, ok)
-		(calc) => {
+		(calc) => 
 			NodeB.receive(calc)
 			NodeC.transmit(calc)
-		}
+		
 		
 
 NodeA.func1(5,5)
