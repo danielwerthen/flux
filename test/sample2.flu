@@ -1,0 +1,7 @@
+.Calculators.Addition.add(10,10)
+	(res) =>
+		.Printers.Color.print(res)
+	(res) =>
+		.Printers.Color.print(res)
+	(res) =>
+		.Printers.Color.print(res)

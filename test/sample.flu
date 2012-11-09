@@ -1,0 +1,36 @@
+Signal({ timeout: 100 })
+	.Knx.receive
+		(add, mess) => NodeB.print(mess)
+
+Signal({ timeout: 500 })
+	NodeA.func1({ a: 5 }, 15)
+		(err, res) => NodeB.print(res)
+			(ok) => NodeB.print(err, ok)
+		(calc) => {
+			NodeB.receive(calc)
+			NodeC.transmit(calc)
+		}
+		
+
+NodeA.func1(5,5)
+	(err, res) => 
+		NodeB.print(res)
+		NodeC.print(err)
+	(calc) =>
+		NodeB.print(calc)
+			NodeB.terminate()
+			NodeC.record()
+		NodeC.print(calc)
+
+.Calculators.add(10,10)
+	(res) =>
+		.Printers.Color print(res)
+
+{ id: 01232042, execution:
+	{ step: 1, selector: '.Calculators', function: 'add', params: [ 10, 10 ],
+		callbacks: { args: [ res ], calls: [
+			{ step: 2, selector: '.Printers.Color', function: 'print', params: [ res ] }
+		] }
+	}
+}
+
