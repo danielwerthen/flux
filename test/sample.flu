@@ -1,28 +1,20 @@
 Signal({ timeout   : 100, "lazy": { deniro: 5, huru: 24 }})
-	.Knx.receive
+	.Knx.receive()
 		(add, mess) => NodeB.print(mess)
 
 Signal({ timeout: 500 })
 	NodeA.func1({ a: 5 }, 15)
 		(err, res) => NodeB.print(res)
 			(ok) => NodeB.print(err, ok)
-		(calc) => 
-			NodeB.receive(calc)
-			NodeC.transmit(calc)
-		
-		
 
-NodeA.func1(5,5)
-	(err, res) => 
-		NodeB.print(res)
-		NodeC.print(err)
+NodeA.func1(5,15)
 	(calc) =>
 		NodeB.print(calc)
 			NodeB.terminate()
 			NodeC.record()
 		NodeC.print(calc)
 
-.Calculators.add(10,10)
+.Calculators.add(10,20)
 	(res) =>
 		.Printers.Color print(res)
 
