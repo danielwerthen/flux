@@ -9,10 +9,10 @@ Signal({ timeout: 500 })
 
 NodeA.func1(5,15)
 	(calc) =>
-		NodeB.print(calc)
+		NodeB.print(calc2)
 			NodeB.terminate()
 			NodeC.record()
-		NodeC.print(calc)
+		NodeC.print(calc2)
 
 .Calculators.add(10,20)
 	(res) =>
