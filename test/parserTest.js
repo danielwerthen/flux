@@ -1,5 +1,8 @@
 var Parser = require('../lib/parser.js')
 	, fs = require('fs')
+	, _ = require('underscore')
+
+console.dir(_.rest([1,2,3,4,5], 2));
 
 var p = new Parser(fs.readFileSync('./test/sample.flu', 'utf-8'));
 var fs = p.signalify();
