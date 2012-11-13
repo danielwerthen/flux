@@ -1,0 +1,5 @@
+NodeA.Add(5, 15)
+	(result) =>
+		NodeB.Subtract(result, 10)
+			(result) => 
+				NodeA.Print(result)
