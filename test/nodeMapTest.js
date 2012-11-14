@@ -1,5 +1,6 @@
 var NodeMap = require('../lib/nodeMap')
 	, Parser = require('../lib/parser')
+	, Signal = require('../lib/signal')
 	, fs = require('fs')
 	, Executor = require('../lib/executor')
 	, NodeA = new Executor()
@@ -13,7 +14,7 @@ function Add(a, b, callback) {
 NodeA.add('Add', { params: ['a', 'b'], args: ['result'] }, Add);
 
 NodeA.add('Print', { params: ['result'] }, function (result, callback) {
-	console.log(result);
+	console.log('Print ' + result);
 	callback();
 });
 
@@ -21,12 +22,15 @@ NodeB.add('Subtract', { params: ['a', 'b'], args: ['result'] }, function (a, b, 
 	callback(a - b);
 });
 
-var p = new Parser(fs.readFileSync('./test/calculus.flu', 'utf-8'));
-var fs = p.signalify();
+//var p = new Parser(fs.readFileSync('./test/calculus.flu', 'utf-8'));
+//var fs = p.signalify();
+var sig = fs.readFileSync('./test/calculus.flu', 'utf-8');
 
-console.dir(fs);
-
-/*map.add('NodeA', NodeA, 'Added', 'Fig');
+map.add('NodeA', NodeA, 'Added', 'Fig');
 map.add('NodeB', NodeB, 'Added');
 
-console.dir(map.resolve(process.argv[2] || 'NodeA'));*/
+var signal = new Signal(map);
+signal.load(sig);
+signal.start();
+
+//console.dir(map.resolve(process.argv[2] || 'NodeA'));

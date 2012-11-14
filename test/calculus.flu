@@ -1,4 +1,4 @@
-NodeA.Add(5, 15)
+NodeA.Add(25, 5)
 	(result) =>
 		NodeB.Subtract(result, 10)
 			(result) => 

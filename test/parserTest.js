@@ -7,7 +7,7 @@ console.dir(_.rest([1,2,3,4,5], 2));
 var p = new Parser(fs.readFileSync('./test/sample.flu', 'utf-8'));
 var fs = p.signalify();
 for (var i in fs) {
-	fs[i].print();
+	console.log(fs[i].print());
 }
 var validate = p.validate(fs);
 if (!validate.passed) {
