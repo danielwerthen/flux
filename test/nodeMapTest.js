@@ -14,7 +14,8 @@ function Add(a, b, callback) {
 NodeA.add('Add', { params: ['a', 'b'], args: ['result'] }, Add);
 
 NodeA.add('Print', { params: ['result'] }, function (result, callback) {
-	console.log('Print ' + result);
+	console.log('Print: ');
+	console.dir(result);
 	callback();
 });
 
