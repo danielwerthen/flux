@@ -1,13 +1,13 @@
-Node.Add(40,10)
+NodeA.Add(40,10)
 	(result) => 
 		NodeA.Print({ hello: result })
 
 NodeA.Add(25, 5)
-	(result) =>
-		NodeB.Subtract(result, 10)
-			(result) => 
-				NodeA.Print(result)
-				NodeB.Subtract(result, 1000)
-					(result2) =>
-						NodeA.Print({ result1: result, result2: result2 })
+	(r1) =>
+		NodeB.Subtract(r1, 10)
+			(r2) => 
+				NodeA.Print(r2)
+				NodeB.Subtract(r2, 1000)
+					(r3) =>
+						NodeA.Print({ result1: r1, result2: r3 })
 
