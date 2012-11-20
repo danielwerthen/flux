@@ -11,7 +11,8 @@
   "dependencies": {
 		"q": "0.8.x",
 		"underscore": "1.4.x",
-		"nssocket": "0.3.x"
+		"nssocket": "0.3.x",
+		"eventemitter2": "0.4.x"
 	},
   "devDependencies": {
 		"mocha": "1.6.x",
