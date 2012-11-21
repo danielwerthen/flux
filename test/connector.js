@@ -14,16 +14,16 @@ for (var i = 1; i < args.length; i++) {
 var isa = args.length === 1;
 var NodeMap = require('../lib/nodeMap')
 	, Parser = require('../lib/parser')
-	, Signal = require('../lib/signal')
+	, Signal = require('../lib/signal2')
 	, fs = require('fs')
 	, map = new NodeMap();
 
-var sig = fs.readFileSync('./test/calculus.flu', 'utf-8');
+var sig = fs.readFileSync('./test/calculus2.flu', 'utf-8');
 
 
 var signal = new Signal(map, cc);
-signal.load(sig);
 function Add(a, b, callback) {
+	console.log('adding');
 	callback(a + b);
 }
 
@@ -42,14 +42,28 @@ if (!isa) {
 else {
 	var NodeB = new Executor();
 	NodeB.add('Subtract', { params: ['a', 'b'], args: ['result'] }, function (a, b, callback) {
+		console.log('subtracting');
 		callback(a - b);
 	});
+	NodeB.add('Print', { params: ['result'] }, function (result, callback) {
+		console.log('Print: ');
+		console.dir(result);
+		callback();
+	});
 	map.add('NodeB', NodeB, 'Added');
+}
+
+cc.on(['attached', 'node'], function (node) {
 	setTimeout(function () {
-		console.log('start');
+		signal.load(sig);
 		signal.start();
 	}, 2000);
-}
+});
+
+cc.on(['function', 'call'], function (data) {
+	var p = data.package;
+	signal.handleCall(p);
+});
 
 /*var server = ns.createServer(function (socket) {
 	socket.send(['you', 'there']);
