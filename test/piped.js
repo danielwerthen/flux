@@ -1,14 +1,21 @@
 var _ = require('underscore')
 	, ns = require('nssocket')
 	, Connector = require('../lib/connector')
+	, http = require('http')
+	, Pipe = require('../lib/httpPipe')
+	, pipe = new Pipe()
 
 var args = process.argv.splice(2);
 
-var cc = new Connector(args[0] || 3000, args.length > 1 ? 'NodeA' : 'NodeB', 'Adder', 'Finder');
+/*var cc = new Connector(args[0] || 3000, args.length > 1 ? 'NodeA' : 'NodeB', 'Adder', 'Finder');
 cc.start();
 
 for (var i = 1; i < args.length; i++) {
 	cc.connect('localhost', args[i]);
+}*/
+http.createServer(pipe.listen()).listen(args[0] || 3000);
+for (var i = 1; i < args.length; i++) {
+	pipe.connect('localhost', args[i], args[0] === 3000 ? 'NodeA' : 'NodeB');
 }
 
 var isa = args.length === 1;
@@ -21,7 +28,7 @@ var NodeMap = require('../lib/nodeMap')
 var sig = fs.readFileSync('./test/calculus2.flu', 'utf-8');
 
 
-var signal = new Signal(map, cc);
+var signal = new Signal(map, pipe);
 function Add(a, b, callback) {
 	console.log('adding');
 	callback(a + b);
@@ -53,18 +60,15 @@ else {
 	map.add('NodeB', NodeB, 'Added');
 }
 
-cc.on(['attached', 'node'], function (node) {
-	setTimeout(function () {
-		signal.load(sig);
-		signal.start();
-	}, 2000);
-});
+setTimeout(function () {
+	signal.load(sig);
+	signal.start();
+}, 5000);
 
-cc.on(['function', 'call'], function (data) {
-	var p = data.package;
-	signal.handleCall(p);
+pipe.on(function (call) {
+	console.dir(call);
+	signal.handleCall(call);
 });
-
 /*var server = ns.createServer(function (socket) {
 	socket.send(['you', 'there']);
 	socket.data(['iam', 'here'], function (data) {
