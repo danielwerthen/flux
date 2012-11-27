@@ -1,10 +1,10 @@
 var http = require('http')
-	, httpPipe = require('../lib/httpPipe2')
+	, httpPipe = require('../lib/httpPipe')
 	, sl = require('../lib/socketListener')
 	, NodeMap = require('../lib/nodeMap')
 	, Map = require('../lib/map')
 	, Node = require('../lib/node')
-	, Signal = require('../lib/signal2')
+	, Signal = require('../lib/signal')
 	, fs = require('fs')
 	//, pipe = new Pipe();
 

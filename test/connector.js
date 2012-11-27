@@ -14,7 +14,7 @@ for (var i = 1; i < args.length; i++) {
 var isa = args.length === 1;
 var NodeMap = require('../lib/nodeMap')
 	, Parser = require('../lib/parser')
-	, Signal = require('../lib/signal2')
+	, Signal = require('../lib/signal')
 	, fs = require('fs')
 	, map = new NodeMap();
 
