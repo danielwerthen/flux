@@ -1,13 +1,8 @@
-NodeA.Add(2000, 1000)
-	(result) =>
-		NodeB.Print(result)
-			() =>
-				NodeA.Add(result, 50)
-					(r2) =>
-						NodeB.Print(r2)
-NodeB.Subtract(40, 20)
-	(result) =>
-		NodeA.Print({ Second: result })
-			NodeA.Add(result, 20)
-				(r) =>
-					NodeB.Print({ thid: r })
+NodeA.Interval(1000)
+	NodeA.Add(2000, 1000)
+		(result) =>
+			NodeB.Print(result)
+NodeA.Interval(1000)
+	NodeB.Subtract(40, 20)
+		(result) =>
+			NodeA.Print({ Second: result })
