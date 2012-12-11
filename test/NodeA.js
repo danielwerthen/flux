@@ -32,7 +32,7 @@ var signal = flux.addSignal(fs.readFileSync('./calculus2.flu', 'utf-8'));
 signal.start();
 
 flux.connect({ connections: [ { url: 'http://localhost:3001', global: false, netspace: 'home' } ] }, function (err) {
-		if (err) console.log('fail');
-		if (err) return console.dir(err);
-		return console.log('Flux is loaded');
+	if (err) console.log('fail');
+	if (err) return console.dir(err);
+	return console.log('Flux is loaded');
 });
