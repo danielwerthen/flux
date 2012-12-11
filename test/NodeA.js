@@ -4,7 +4,7 @@ var Flux = require('../lib/flux')
 	
 var flux = new Flux();
 
-http.createServer(flux.listen()).listen(3000);
+http.createServer(flux.listen()).listen(3001);
 
 var node = flux.createNode('NodeA', 'Calculator', 'Printer');
 
@@ -25,9 +25,9 @@ node.addFunction('Print', function (a, cb) {
 	cb();
 });
 
-flux.addRemoteNode({ protocol: 'http', url: 'localhost:3001' }, 'NodeB', 'Calculator', 'Printer');
+flux.addRemoteNode({ protocol: 'http', url: 'localhost:3002' }, 'NodeB', 'Calculator', 'Printer');
 
 var signal = flux.addSignal(fs.readFileSync('./test/calculus2.flu', 'utf-8'));
 signal.start();
 
-flux.connect();
+flux.connect({ connections: [ { url: 'http://localhost:3001', global: false, netspace: 'home' } ] });
