@@ -7,6 +7,7 @@ var flux = new Flux();
 http.createServer(flux.listen()).listen(3001);
 
 var node = flux.createNode('NodeA', 'Calculator', 'Printer');
+var node2 = flux.createNode('NodeC', 'Calculator', 'Printer');
 
 node.addFunction('Interval', function (time, cb) {
 	setInterval(cb, time);
