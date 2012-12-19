@@ -1,1 +1,5 @@
-Hello world
+Printer.Send(5, 10)
+	(a, b) =>
+		Calculator.Add(a, b)
+			(res) =>
+				Printer.Print(res)
