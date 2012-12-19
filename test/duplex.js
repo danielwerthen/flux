@@ -3,7 +3,7 @@ var Flux = require('../index')
 
 var flux = new Flux();
 
-http.createServer(flux.duplex()).listen(process.env.PORT || 3001);
+http.createServer(flux.duplex()).listen(process.env.PORT || 8080);
 
 var node = flux.createNode('Calculator');
 
