@@ -12,3 +12,4 @@ node.addFunction('Add', function (a, b, cb) {
 });
 
 flux.start();
+console.log('Flux is running');
